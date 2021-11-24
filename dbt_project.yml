@@ -33,7 +33,7 @@ vars:
 
 # Model config
 models:
-    stacktonic_cloud:
+    stacktonic_example_project:
         marts:
             core:
                 materialized: table
