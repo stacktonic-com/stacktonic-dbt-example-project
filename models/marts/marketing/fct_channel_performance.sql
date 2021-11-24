@@ -3,7 +3,7 @@
     materialized = 'incremental',
     partition_by = {'field': 'date', 'data_type': 'date'},
     incremental_strategy = 'insert_overwrite',
-    tags=['incremental']
+    tags=['incremental', 'daily']
   )
 }}
 
