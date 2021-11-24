@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: int_event_sessions__grouped
+    description: "This intermediate table groups Google Analytics 4 events to sessions. Some events are grouped into an array of struct to maintain required event level data for further analysis (e.g. viewed items)."
+  - name: int_sessions_customer__grouped
+    description: "This intermediate table groups Google Analytics 4 sessions to unique users (grouped on user_id -> customer-id)"
+  - name: int_sessions_customer_map__grouped
+    description: "This intermediate table provides a mapping table based on all identifiers in the Google Analytics 4 dataset. Identifiers are grouped on user_id (customer-id -> known users)"

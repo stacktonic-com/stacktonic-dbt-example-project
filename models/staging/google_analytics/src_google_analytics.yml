@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: google_analytics
+    database: stacktonic-cloud # gcp-project
+    dataset: analytics_263482362 # gcp-dataset
+    
+    freshness:
+      warn_after: { count: 24, period: hour } 
+      error_after: { count: 30, period: hour } 
+    
+    loaded_at_field: "parse_timestamp(_table_suffix, '%Y%m%d')"
+
+    tables:
+      - name: events
+        identifier: events_*
+        description: "Default Google Analytics 4 (raw) data dumps. Tables are date sharded (events_YYYYMMDD)."

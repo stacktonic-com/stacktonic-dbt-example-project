@@ -1,0 +1,24 @@
+# dbt profile yaml file with multiple environments
+stacktonic_example_project:
+ target: dev
+ outputs:
+  dev:
+   type: bigquery
+   method: oauth
+   project: stacktonic-examples
+   dataset: dbt_dev
+   threads: 1
+   timeout_seconds: 300
+   location: EU
+   priority: interactive
+   retries: 1
+  prod:
+   type: bigquery
+   method: oauth
+   project: stacktonic-examples
+   dataset: dbt
+   threads: 5
+   timeout_seconds: 300
+   location: EU
+   priority: interactive
+   retries: 1

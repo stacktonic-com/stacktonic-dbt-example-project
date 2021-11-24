@@ -1,0 +1,155 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Final table with aggegrated online behavorial data grouped on customer-id (known users)"
+    columns:
+      - name: customer_id
+        description: Unique identifier for a customer
+        tests:
+          - unique
+          - not_null
+      - name: user_first_touch_at
+        description: Timestamp of first (user) interaction (based on GA4 memory)
+      - name: first_session_at
+        description: Timestamp of first session within custom date window
+      - name: last_session_at
+        description: Last session timestamp
+      - name: last_transaction_at
+        description: Last transaction timestamp
+      - name: sessions
+        description: Total number of sessions
+      - name: sessions_1d_7d
+        description: Total number of sessions between last 1 - 7 days
+      - name: sessions_7d_30d
+        description: Total number of sessions between last 7 - 30 days
+      - name: sessions_30d_90d
+        description: Total number of sessions between last 30 - 90 days
+      - name: sessions_engaged
+        description: Total number of engaged sessions
+      - name: engagement_time_avg
+        description: Average engagement time
+      - name: newsletter_subscription
+        description: Has customer subscribed for newsletter
+      - name: newsletter_subscription_at
+        description: Timestamp of customer subscription
+      - name: total_transactions
+        description: Total number of transactions
+      - name: total_transaction_value
+        description: Sum of all transaction values
+      - name: devices
+        description: Number of unique device types used
+      - name: channels
+        description: Number of unique channel groupings in journey (session acquisition)
+      - name: days_since_last_session
+        description: Number of days since last session
+      - name: days_since_last_transaction
+        description: Number of days since last transaction
+      - name: device_first
+        description: Acquisition device type
+      - name: device_last
+        description: Last used device type
+      - name: device_most_freq
+        description: Most frequently used device type
+      - name: os_last
+        description: Last used operating system
+      - name: os_most_freq
+        description: Most frequently used operating system
+      - name: browser_last
+        description: Last used browser
+      - name: browser_most_freq
+        description: Most frequently used browser
+      - name: user_source
+        description: User acquisition campaign source (based on GA4 memory)
+      - name: user_medium
+        description: User acquisition campaign medium (based on GA4 memory)
+      - name: user_campaign
+        description: User acquisition campaign name (based on GA4 memory)
+      - name: user_channel_grouping
+        description: User acquisition channel grouping (based on GA4 memory)
+      - name: channel_grouping_first
+        description: First channel grouping within custom date window
+      - name: channel_grouping_last
+        description: Last used channel grouping
+      - name: channel_most_freq
+        description: Most frequently used channel
+      - name: item_interactions
+        description: Array of struct containing selected item iteractions (e.g. item views / add-to-carts). Max 200 items.
+
+  - name: dim_customer_identity
+    description: "First-party identity graph (on customer-id level)"
+    columns:
+      - name: customer_id
+        description: Unique identifier for a customer
+        tests:
+          - unique
+          - not_null
+      - name: last_session_at
+        description: Timestamp of last session
+      - name: fpc_id
+        description: Array of structs, containg all the first-party-IDs (device-IDs) attached to user, including a timestamp when unique id was last detected
+      - name: gclid
+        description: Array of structs, containing all the Google Click-IDs attached to customer, including a timestamp when unique id was last detected
+      - name: transaction_id
+        description: Array of structs, containing all the transaction-IDs attached to customer, including a timestamp when unique id was last detected
+
+  - name: fct_sessions
+    description: "Final table containing sessions (visits)"
+    columns:
+      - name: fpc_id
+        description: First-party cookie-ID. Unique identifier for a device / browser
+        tests:
+          - not_null
+      - name: session_id
+        description: Unique session-ID
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Array of struct, containing all the customer-ID's (when available in session), including a timestamp when unique id was last detected
+      - name: gclid
+        description: Array of struct, containing all the Google Click-ID's (when available in session), including a timestamp when unique id was last detected
+      - name: transaction_id
+        description: Array of struct, containing all transaction-ID's (when available in session), including a timestamp when unique id was last detected
+      - name: session_start_at
+        description: Session start timestamp
+      - name: session_engaged
+        description: Is session engaged (engagement time > 0 seconds)
+      - name: session_engagement_time
+        description: Engagement time within session (in seconds)
+      - name: user_first_touch_at
+        description: Timestamp of first (user) interaction (based on GA4 memory)
+      - name: user_source
+        description: User acquisition campaign source (based on GA4 memory)
+      - name: user_medium
+        description: User acquisition campaign medium (based on GA4 memory)
+      - name: user_campaign
+        description: User acquisition campaign name (based on GA4 memory)
+      - name: user_channel_grouping
+        description: User acquisition channel grouping (based on GA4 memory)
+      - name: device
+        description: Session device type    
+      - name: os
+        description: Session operating system 
+      - name: browser
+        description: Session browser
+      - name: country
+        description: Session country
+      - name: city
+        description: Session city
+      - name: session_source
+        description: First campaign source in session
+      - name: session_medium
+        description: First campaign medium in session
+      - name: session_campaign
+        description: First campaign name in session
+      - name: session_channel_grouping
+        description: Channel grouping of first campaign in session
+      - name: newsletter_subscriptions
+        description: Newsletter subscriptions in session
+      - name: transactions
+        description: Transactions in session
+      - name: transaction_value
+        description: Total transaction value in session
+      - name: item_interactions
+        description: Array of struct containing selected item iteractions within session (e.g. item views / add-to-carts). Max 100 interactions.

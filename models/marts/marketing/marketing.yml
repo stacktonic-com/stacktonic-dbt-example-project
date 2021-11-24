@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: fct_channel_performance
+    description: "Online channel performance grouped by day and channel"
+    columns:
+      - name: date
+        description: Session date
+        tests:
+          - not_null
+      - name: session_source
+        description: Session campaign source
+      - name: session_medium
+        description: Session campaign medium
+      - name: session_channel_grouping
+        description: Session channel grouping
+      - name: users
+        description: Number of users
+      - name: sessions
+        description: Number of sessions
+      - name: sessions_engaged_10s
+        description: Number of sessions with more than 10s of engagement
+      - name: sessions_engaged_30s
+        description: Number of sessions with more than 30s of engagement
+      - name: newsletter_subscriptions
+        description: Number of newsletter subscriptions
+      - name: transactions
+        description: Number transactions
+      - name: total_transaction_value
+        description: Total transaction value
