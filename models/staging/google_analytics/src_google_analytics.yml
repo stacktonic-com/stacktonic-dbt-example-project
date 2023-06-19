@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: google_analytics
-    database: stacktonic-cloud # gcp-project
-    dataset: analytics_263482362 # gcp-dataset
+    database: bigquery-public-data # gcp-project
+    dataset: ga4_obfuscated_sample_ecommerce # gcp-dataset
     
     freshness:
       warn_after: { count: 24, period: hour } 
@@ -12,6 +12,6 @@ sources:
     loaded_at_field: "parse_timestamp(_table_suffix, '%Y%m%d')"
 
     tables:
-      - name: events
+      - name: events_20210131
         identifier: events_*
         description: "Default Google Analytics 4 (raw) data dumps. Tables are date sharded (events_YYYYMMDD)."
