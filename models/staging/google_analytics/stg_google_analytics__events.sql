@@ -9,7 +9,7 @@ with source as (
     select 
       *,
       _table_suffix as table_suffix 
-    from {{ source('google_analytics', 'events') }}
+    from {{ source('google_analytics', 'events_20210131') }}
     where
         -- start date (using the _table_suffix_ pseudo column for performance)
         (_table_suffix between format_date('%Y%m%d', date('{{ var("start_date") }}'))
