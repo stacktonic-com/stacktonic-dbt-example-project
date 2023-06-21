@@ -12,6 +12,6 @@ sources:
     loaded_at_field: "parse_timestamp(_table_suffix, '%Y%m%d')"
 
     tables:
-      - name: events_20210131
+      - name: events
         identifier: events_*
         description: "Default Google Analytics 4 (raw) data dumps. Tables are date sharded (events_YYYYMMDD)."
